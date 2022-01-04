@@ -1,12 +1,69 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { ModalContext } from '../context/ModalContext';
 
+import Modal from '@material-ui/core/Modal';
+import { makeStyles } from '@material-ui/core/styles';
+
+function getModalStyle() {
+   const top = 50;
+   const left = 50;
+
+   return {
+      top: `${top}%`,
+      left: `${left}%`,
+      transform: `translate(-${top}%, -${left}%)`,
+   };
+}
+
+const useStyles = makeStyles((theme) => ({
+   paper: {
+      position: 'absolute',
+      width: 400,
+      backgroundColor: theme.palette.background.paper,
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+   },
+   //    paper: {
+   //       position: 'absolute',
+   //       width: 300,
+   //       backgroundColor: theme.palette.background.paper,
+   //       boxShadow: theme.shadows[5],
+   //       padding: theme.spacing(2, 4, 3),
+   //       overflow: 'scroll',
+   //       height: '100%',
+   //       maxHeight: 500,
+   //       display: 'block',
+   //    },
+   //    header: {
+   //       padding: '12px 0',
+   //       borderBottom: '1px solid darkgrey',
+   //    },
+   //    content: {
+   //       padding: '12px 0',
+   //       overflow: 'scroll',
+   //    },
+}));
+
 const Receta = ({ receta }) => {
+   // Configuración de modal de material-ui
+   const [modalStyle] = useState(getModalStyle);
+   const [open, setOpen] = useState(false);
+
+   const classes = useStyles();
+
+   const handleOpen = () => setOpen(true);
+
+   const handleClose = () => {
+      setIdReceta(null);
+      setOpen(false);
+   };
+
    // Extraer los valores del context
    const { setIdReceta } = useContext(ModalContext);
 
    const handleClick = () => {
       setIdReceta(receta.idDrink);
+      handleOpen();
    };
 
    return (
@@ -20,10 +77,16 @@ const Receta = ({ receta }) => {
             <div className="card-body">
                <h2 className="card-title">{receta.strDrink}</h2>
             </div>
-            {/* <button type="button" className="btn btn-block btn-primary">
-               Ver Receta
-            </button> */}
          </div>
+
+         <Modal
+            //
+            open={open}
+            onClose={handleClose}>
+            <div style={modalStyle} className={classes.paper}>
+               <h1>Desde modal</h1>
+            </div>
+         </Modal>
       </div>
    );
 };
