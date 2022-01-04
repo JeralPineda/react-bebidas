@@ -13,8 +13,8 @@ const Form = () => {
             <legend>Busca bebidas por Categoría o Ingrediente</legend>
          </fieldset>
 
-         <div className="row">
-            <div className="col-md-4 mt-3">
+         <div className="row mt-3">
+            <div className="col-md-4 mt-1">
                <input
                   //
                   type="text"
@@ -23,7 +23,7 @@ const Form = () => {
                   placeholder="Buscar por Ingrediente"
                />
             </div>
-            <div className="col-md-4 mt-3">
+            <div className="col-md-4 mt-1">
                <select
                   //
                   name="categoria"
@@ -31,7 +31,7 @@ const Form = () => {
                   <option value="">-- Seleccione una Categoría --</option>
                </select>
             </div>
-            <div className="col-md-4 mt-3">
+            <div className="col-md-4 mt-1">
                <button type="submit" className="btn btn-block btn-primary">
                   Buscar Recetas
                </button>
