@@ -27,7 +27,7 @@ const RecetasProvider = ({ children }) => {
          obtenerRecetas();
 
          setTimeout(() => {
-            // setCargando(!cargando);
+            setCargando(!cargando);
          }, 3000);
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
