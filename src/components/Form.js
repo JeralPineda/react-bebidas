@@ -5,8 +5,6 @@ const Form = () => {
    // Consumiendo el context
    const {categorias} = useContext(CategoriasContex);
 
-   console.log(categorias);
-
    return (
       <form className="col-md-12">
          <fieldset className="text-center">
@@ -29,6 +27,15 @@ const Form = () => {
                   name="categoria"
                   className="form-control">
                   <option value="">-- Seleccione una Categoría --</option>
+
+                  {categorias.map((categoria) => (
+                     <option
+                        //
+                        key={categoria.strCategory}
+                        value={categoria.strCategory}>
+                        {categoria.strCategory}
+                     </option>
+                  ))}
                </select>
             </div>
             <div className="col-md-4 mt-1">
