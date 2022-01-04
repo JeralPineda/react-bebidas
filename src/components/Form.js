@@ -1,5 +1,6 @@
-import {useContext, useState} from 'react';
-import {CategoriasContex} from '../context/CategoriasContex';
+import { useContext, useState } from 'react';
+import { CategoriasContex } from '../context/CategoriasContex';
+import { RecetasContext } from '../context/RecetasContext';
 
 const Form = () => {
    const [busqueda, setBusqueda] = useState({
@@ -8,7 +9,8 @@ const Form = () => {
    });
 
    // Consumiendo el context
-   const {categorias} = useContext(CategoriasContex);
+   const { categorias } = useContext(CategoriasContex);
+   const { setBusquedaRecetas } = useContext(RecetasContext);
 
    // Leer los contenidos
    const handleChange = (e) => {
@@ -18,8 +20,17 @@ const Form = () => {
       });
    };
 
+   const handleSubmit = (e) => {
+      e.preventDefault();
+
+      setBusquedaRecetas(busqueda);
+   };
+
    return (
-      <form className="col-md-12">
+      <form
+         //
+         className="col-md-12"
+         onSubmit={handleSubmit}>
          <fieldset className="text-center">
             <legend>Busca bebidas por Categoría o Ingrediente</legend>
          </fieldset>
