@@ -31,6 +31,7 @@ const RecetasProvider = ({ children }) => {
       <RecetasContext.Provider
          //
          value={{
+            recetas,
             setBusquedaRecetas,
             setConsultar,
          }}>

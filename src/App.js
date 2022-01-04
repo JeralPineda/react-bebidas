@@ -2,6 +2,7 @@ import Form from './components/Form';
 import Header from './components/Header';
 import CategoriasProvider from './context/CategoriasContex';
 import RecetasProvider from './context/RecetasContext';
+import ListRecetas from './components/ListRecetas';
 
 function App() {
    return (
@@ -13,6 +14,8 @@ function App() {
                <div className="row">
                   <Form />
                </div>
+
+               <ListRecetas />
             </div>
          </RecetasProvider>
       </CategoriasProvider>
