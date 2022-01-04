@@ -1,4 +1,5 @@
-import {createContext, useState} from 'react';
+import axios from 'axios';
+import {createContext, useEffect, useState} from 'react';
 
 // Crear el Context
 export const CategoriasContex = createContext();
@@ -6,13 +7,24 @@ export const CategoriasContex = createContext();
 // Provider es donde se encuentran las funciones y state
 const CategoriasProvider = ({children}) => {
    // Creando el state del Context
-   const [hola, setHola] = useState('Hola que tal');
+   const [categorias, setCategorias] = useState([]);
 
+   // Ejecutar el llamado a la API
+   useEffect(() => {
+      const obtenerCategorias = async () => {
+         const url = `https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list`;
+
+         const categoria = await axios.get(url);
+
+         setCategorias(categoria.data.drinks);
+      };
+      obtenerCategorias();
+   }, []);
    return (
       <CategoriasContex.Provider
          // valores disponibles en los demas componentes
          value={{
-            hola,
+            categorias,
          }}>
          {children}
       </CategoriasContex.Provider>
