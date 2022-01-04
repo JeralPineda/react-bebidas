@@ -10,7 +10,7 @@ const Form = () => {
 
    // Consumiendo el context
    const { categorias } = useContext(CategoriasContex);
-   const { setBusquedaRecetas } = useContext(RecetasContext);
+   const { setBusquedaRecetas, setConsultar } = useContext(RecetasContext);
 
    // Leer los contenidos
    const handleChange = (e) => {
@@ -24,6 +24,8 @@ const Form = () => {
       e.preventDefault();
 
       setBusquedaRecetas(busqueda);
+
+      setConsultar(true);
    };
 
    return (
@@ -64,10 +66,17 @@ const Form = () => {
                   ))}
                </select>
             </div>
+
             <div className="col-md-4 mt-1">
-               <button type="submit" className="btn btn-block btn-primary">
-                  Buscar Recetas
-               </button>
+               {busqueda.nombre === '' || busqueda.categoria === '' ? (
+                  <button type="submit" className="btn btn-block btn-primary disabled">
+                     Buscar Recetas
+                  </button>
+               ) : (
+                  <button type="submit" className="btn btn-block btn-primary">
+                     Buscar Recetas
+                  </button>
+               )}
             </div>
          </div>
       </form>
