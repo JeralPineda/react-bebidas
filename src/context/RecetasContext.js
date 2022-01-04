@@ -10,6 +10,7 @@ const RecetasProvider = ({ children }) => {
       categoria: '',
    });
    const [consultar, setConsultar] = useState(false);
+   const [cargando, setCargando] = useState(false);
 
    const { nombre, categoria } = busqueda;
 
@@ -24,14 +25,20 @@ const RecetasProvider = ({ children }) => {
          };
 
          obtenerRecetas();
+
+         setTimeout(() => {
+            // setCargando(!cargando);
+         }, 3000);
       }
-   }, [busqueda, categoria, nombre, consultar]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [busqueda]);
 
    return (
       <RecetasContext.Provider
          //
          value={{
             recetas,
+            cargando,
             setBusquedaRecetas,
             setConsultar,
          }}>

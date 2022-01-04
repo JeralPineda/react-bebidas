@@ -10,7 +10,7 @@ function App() {
          <RecetasProvider>
             <Header />
 
-            <div className="container mt-5">
+            <div className="container mt-5 loading-skeleton">
                <div className="row">
                   <Form />
                </div>
