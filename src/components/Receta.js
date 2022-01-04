@@ -1,7 +1,20 @@
+import { useContext } from 'react';
+import { ModalContext } from '../context/ModalContext';
+
 const Receta = ({ receta }) => {
+   // Extraer los valores del context
+   const { setIdReceta } = useContext(ModalContext);
+
+   const handleClick = () => {
+      setIdReceta(receta.idDrink);
+   };
+
    return (
       <div className="col-md-4 mb-3">
-         <div className="card">
+         <div
+            //
+            className="card"
+            onClick={handleClick}>
             <img src={receta.strDrinkThumb} alt={`Imagen de ${receta.strDrink}`} className="card-img-top" />
 
             <div className="card-body">
