@@ -16,32 +16,32 @@ function getModalStyle() {
 }
 
 const useStyles = makeStyles((theme) => ({
-   paper: {
-      position: 'absolute',
-      width: 400,
-      backgroundColor: theme.palette.background.paper,
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
-   },
    //    paper: {
    //       position: 'absolute',
-   //       width: 300,
+   //       width: 400,
    //       backgroundColor: theme.palette.background.paper,
    //       boxShadow: theme.shadows[5],
    //       padding: theme.spacing(2, 4, 3),
-   //       overflow: 'scroll',
-   //       height: '100%',
-   //       maxHeight: 500,
-   //       display: 'block',
    //    },
-   //    header: {
-   //       padding: '12px 0',
-   //       borderBottom: '1px solid darkgrey',
-   //    },
-   //    content: {
-   //       padding: '12px 0',
-   //       overflow: 'scroll',
-   //    },
+   paper: {
+      position: 'absolute',
+      width: 300,
+      backgroundColor: theme.palette.background.paper,
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+      overflow: 'auto',
+      height: '100%',
+      maxHeight: 500,
+      display: 'block',
+   },
+   header: {
+      padding: '12px 0',
+      borderBottom: '1px solid darkgrey',
+   },
+   content: {
+      padding: '12px 0',
+      overflow: 'auto',
+   },
 }));
 
 const Receta = ({ receta }) => {
@@ -55,16 +55,17 @@ const Receta = ({ receta }) => {
 
    const handleClose = () => {
       setIdReceta(null);
+      setReceta({});
       setOpen(false);
    };
-
-   // Extraer los valores del context
-   const { setIdReceta } = useContext(ModalContext);
 
    const handleClick = () => {
       setIdReceta(receta.idDrink);
       handleOpen();
    };
+
+   // Extraer los valores del context
+   const { infoReceta, setIdReceta, setReceta } = useContext(ModalContext);
 
    return (
       <div className="col-md-4 mb-3">
@@ -84,7 +85,11 @@ const Receta = ({ receta }) => {
             open={open}
             onClose={handleClose}>
             <div style={modalStyle} className={classes.paper}>
-               <h1>Desde modal</h1>
+               <h2>{infoReceta.strDrink}</h2>
+               <h3 className="mt-4">Instrucciones</h3>
+               <p>{infoReceta.strInstructions}</p>
+
+               <img src={infoReceta.strDrinkThumb} alt="" className="img-fluid my-4" />
             </div>
          </Modal>
       </div>
