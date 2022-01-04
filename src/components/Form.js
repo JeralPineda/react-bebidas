@@ -1,9 +1,22 @@
-import {useContext} from 'react';
+import {useContext, useState} from 'react';
 import {CategoriasContex} from '../context/CategoriasContex';
 
 const Form = () => {
+   const [busqueda, setBusqueda] = useState({
+      nombre: '',
+      categoria: '',
+   });
+
    // Consumiendo el context
    const {categorias} = useContext(CategoriasContex);
+
+   // Leer los contenidos
+   const handleChange = (e) => {
+      setBusqueda({
+         ...busqueda,
+         [e.target.name]: e.target.value,
+      });
+   };
 
    return (
       <form className="col-md-12">
@@ -19,13 +32,15 @@ const Form = () => {
                   name="nombre"
                   className="form-control"
                   placeholder="Buscar por Ingrediente"
+                  onChange={handleChange}
                />
             </div>
             <div className="col-md-4 mt-1">
                <select
                   //
                   name="categoria"
-                  className="form-control">
+                  className="form-control"
+                  onChange={handleChange}>
                   <option value="">-- Seleccione una Categoría --</option>
 
                   {categorias.map((categoria) => (
